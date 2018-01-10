@@ -8,6 +8,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "node-cron": "^1.2.1"
+    "cheerio": "^1.0.0-rc.2",
+    "node-cron": "^1.2.1",
+    "nodemailer": "^4.4.1",
+    "phantom": "^4.0.12"
   }
 }
