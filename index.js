@@ -36,7 +36,7 @@ function readConfig() {
 
 function startCronjob() {
     console.log('Starting cronjob');
-    return new CronJob('*/5 * * * *', function () {
+    return new CronJob('*/1 * * * *', function () {
         getLatestSignal().then(signal => {
             const isNewSignal = !areSignalsEqual(latestSignal, signal);
             if (isNewSignal) {
