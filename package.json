@@ -1,0 +1,13 @@
+{
+  "name": "coinloop-ai-notify",
+  "version": "1.0.0",
+  "description": "Notify users when new coinloop ai signal occurs",
+  "main": "index.js",
+  "repository": "https://github.com/TedChenNZ/coinloop-ai-notify",
+  "author": "TedChenNZ",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "node-cron": "^1.2.1"
+  }
+}
