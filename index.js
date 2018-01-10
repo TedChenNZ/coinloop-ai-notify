@@ -38,13 +38,15 @@ function startCronjob() {
     console.log('Starting cronjob');
     return new CronJob('*/5 * * * *', function () {
         let veryLatest = getLatestSignal().then(signal => {
-            const newSignal = !areSignalsEqual(latestSignal, veryLatest);
-            if (newSignal) {
-                latestSignal = newSignal;
+            const isNewSignal = !areSignalsEqual(latestSignal, veryLatest);
+            if (isNewSignal) {
+                latestSignal = veryLatest;
                 console.log('New signal');
                 console.log(latestSignal);
                 const emailParameters = generateEmail(latestSignal);
                 email(config.recipients, emailParameters.subject, emailParameters.text);
+            } else {
+                console.log('No new signal found');
             }
         }).catch(err => console.err(err));
     }, null, true, 'Pacific/Auckland');
