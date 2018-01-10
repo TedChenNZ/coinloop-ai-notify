@@ -23,6 +23,7 @@ function waitUntil(asyncTest) {
 function rowToSignal($, row) {
     const header = $(row).find('.ant-row-flex').find('span').find('span');
     const coin = header.first().text();
+    const time = header.last().text();
     const bodyRows = $(row).find('.ant-row').find('.ant-row');
 
     let indicator = bodyRows.first().text();
@@ -37,12 +38,13 @@ function rowToSignal($, row) {
     }
     return {
         coin: coin,
+        time: time,
         indicator: indicator,
         signal: signal,
     }
 }
 
-function getAISignals(content) {
+function getHTMLAISignalsFromContent(content) {
     const $ = cheerio.load(content);
     const rows = $('#ai-signals .ant-card .ant-card-bordered');
     const signals = [];
@@ -52,7 +54,7 @@ function getAISignals(content) {
     return signals;
 }
 
-function coinloop() {
+function getAISignals() {
     var _ph, _page, _outObj;
     return phantom
         .create()
@@ -75,7 +77,7 @@ function coinloop() {
             return _page.property('content');
         })
         .then((content) => {
-            return getAISignals(content);
+            return getHTMLAISignalsFromContent(content);
         })
         .then((signals) => {
             _page.close();
@@ -85,4 +87,7 @@ function coinloop() {
         .catch(e => console.log(e));    
 }
 
-module.exports = coinloop;
+module.exports = {
+    getAISignals,
+    rowToSignal
+}

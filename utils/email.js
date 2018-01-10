@@ -6,8 +6,9 @@ function readSecrets() {
     return fs.readFileSync(path.join(__dirname, '../secrets.json'), 'utf8');
 }
 
+const secrets = JSON.parse(readSecrets());
+
 function email(recipients, subject, message) {
-    var secrets = JSON.parse(readSecrets());
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -28,7 +29,9 @@ function email(recipients, subject, message) {
             console.log(err);
         }
         if (info) {
-            console.log(info);
+            if (info.accepted.length && info.rejected.length === 0) {
+                console.log('Email sent');
+            }
         }
     });
 }
