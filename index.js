@@ -37,10 +37,10 @@ function readConfig() {
 function startCronjob() {
     console.log('Starting cronjob');
     return new CronJob('*/5 * * * *', function () {
-        let veryLatest = getLatestSignal().then(signal => {
-            const isNewSignal = !areSignalsEqual(latestSignal, veryLatest);
+        getLatestSignal().then(signal => {
+            const isNewSignal = !areSignalsEqual(latestSignal, signal);
             if (isNewSignal) {
-                latestSignal = veryLatest;
+                latestSignal = signal;
                 console.log('New signal');
                 console.log(latestSignal);
                 const emailParameters = generateEmail(latestSignal);
