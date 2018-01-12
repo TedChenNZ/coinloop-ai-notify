@@ -27,12 +27,17 @@ function email(recipients, subject, message) {
     transporter.sendMail(options, function (err, info) {
         if (err) {
             console.log(err);
+            return err;
         }
         if (info) {
             if (info.accepted.length && info.rejected.length === 0) {
                 console.log('Email sent');
+                return info;
             }
         }
+        const error = 'An unknown error occurred';
+        console.log(error);
+        return error;
     });
 }
 

@@ -1,0 +1,74 @@
+[
+    {
+        "coin": "ICX",
+        "time": "9 hours ago",
+        "indicator": "Social volume slowing. Buy volume decreasing. Sell signal from MACD.",
+        "signal": {
+            "direction": "decrease",
+            "likelihood": "78%"
+        }
+    },
+    {
+        "coin": "BNB",
+        "time": "9 hours ago",
+        "indicator": "High social volume. Positive market sentiment. Broke through resistance.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "74%"
+        }
+    },
+    {
+        "coin": "BCH",
+        "time": "a day ago",
+        "indicator": "Fork date approaching. Positive market sentiment. Buy volume increasing.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "72%"
+        }
+    },
+    {
+        "coin": "XRP",
+        "time": "2 days ago",
+        "indicator": "Sell volume rapidly increasing. Price broke down through support. Negative market sentiment increasing.",
+        "signal": {
+            "direction": "decrease",
+            "likelihood": "79%"
+        }
+    },
+    {
+        "coin": "ARK",
+        "time": "3 days ago",
+        "indicator": "Positive market sentiment. Buy volume increasing. Buy signal from MACD indicator.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "72%"
+        }
+    },
+    {
+        "coin": "NEBL",
+        "time": "4 days ago",
+        "indicator": "Buy volume increasing. Positive market sentiment. Entry signal from RSI analysis.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "76%"
+        }
+    },
+    {
+        "coin": "ZCL",
+        "time": "9 days ago",
+        "indicator": "Price resting on support. Buy volume increasing. Social volume increasing.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "73%"
+        }
+    },
+    {
+        "coin": "VEN",
+        "time": "13 days ago",
+        "indicator": "Social volume rapidly increasing. Buy volume increasing.",
+        "signal": {
+            "direction": "increase",
+            "likelihood": "75%"
+        }
+    }
+]

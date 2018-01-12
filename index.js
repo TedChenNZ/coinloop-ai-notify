@@ -1,18 +1,8 @@
-const email = require('./utils/email.js');
-const coinloop = require('./utils/coinloop.js');
 const CronJob = require('cron').CronJob;
-const equal = require('deep-equal');
-const fs = require('fs');
-const path = require('path');
+const coinloop = require('./utils/coinloop.js');
+const parse = require('./utils/parse.js');
 
-let config;
 let latestSignal;
-
-function areSignalsEqual(s1, s2) {
-    delete s1.time;
-    delete s2.time;
-    return equal(s1, s2);
-}
 
 function getLatestSignal() {
     return coinloop.getAISignals().then((signals) => {
@@ -23,31 +13,12 @@ function getLatestSignal() {
     });
 }
 
-function generateEmail(signal) {
-    return {
-        subject: 'Coinloop AI Signal: ' + signal.coin + ' ' + signal.signal.direction + ' ' + signal.signal.likelihood,
-        text: signal.indicator
-    }
-}
-
-function readConfig() {
-    return fs.readFileSync(path.join(__dirname, './config.json'), 'utf8');
-}
-
 function startCronjob() {
     console.log('Starting cronjob');
     return new CronJob('*/1 * * * *', function () {
         getLatestSignal().then(signal => {
-            const isNewSignal = !areSignalsEqual(latestSignal, signal);
-            if (isNewSignal) {
-                latestSignal = signal;
-                console.log('New signal');
-                console.log(latestSignal);
-                const emailParameters = generateEmail(latestSignal);
-                email(config.recipients, emailParameters.subject, emailParameters.text);
-            } else {
-                console.log('No new signal found');
-            }
+            parse.parseSignal(latestSignal, signal);
+            latestSignal = signal;
         }).catch(err => console.err(err));
     }, null, true, 'Pacific/Auckland');
 }
@@ -55,7 +26,6 @@ function startCronjob() {
 function main() {
     const startTime = Date.now();
     console.log('Started at ' + startTime);
-    config = readConfig();
 
     let cron;
     getLatestSignal().then((latestSignal) => {
