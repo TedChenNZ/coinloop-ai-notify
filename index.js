@@ -9,6 +9,7 @@ function getLatestSignal() {
         if (signals && signals.length) {
             return signals[0];
         }
+        console.error("Could not find any signals");
         return latestSignal;
     });
 }
