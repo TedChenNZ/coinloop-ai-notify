@@ -7,7 +7,7 @@ let latestSignal;
 function getLatestSignal() {
     return coinloop.getAISignals().then((signals) => {
         if (signals && signals.length) {
-            latestSignal = signals[0];
+            return signals[0];
         }
         return latestSignal;
     });
@@ -28,7 +28,8 @@ function main() {
     console.log('Started at ' + startTime);
 
     let cron;
-    getLatestSignal().then((latestSignal) => {
+    getLatestSignal().then((signal) => {
+        latestSignal = signal;
         cron = startCronjob();
     })
 }
