@@ -26,7 +26,7 @@ function generateEmail(signal) {
 function parseSignal(latestSignal, signal, sendEmail = true) {
     if (!areSignalsEqual(latestSignal, signal)) {
         console.log('New signal');
-        console.log(signal);
+        console.log(JSON.stringify(signal));
         if (sendEmail) {
             const emailParameters = generateEmail(latestSignal);
             email(config.recipients, emailParameters.subject, emailParameters.text);

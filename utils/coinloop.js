@@ -80,8 +80,9 @@ function getAISignals() {
             return getHTMLAISignalsFromContent(content);
         })
         .then((signals) => {
-            _page.close();
-            _ph.exit();
+            _page.close().then(() => {
+                _ph.exit();
+            });
             return signals;
         })
         .catch(e => console.log(e));    
