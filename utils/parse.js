@@ -26,7 +26,7 @@ function parseSignal(latestSignal, signal, sendEmail = true) {
         console.log(JSON.stringify(signal));
         if (sendEmail) {
             const config = readConfig();
-            const emailParameters = generateEmail(latestSignal);
+            const emailParameters = generateEmail(signal);
             email(config.recipients, emailParameters.subject, emailParameters.text);
         }
         return true;
