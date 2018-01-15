@@ -3,13 +3,6 @@ const path = require('path');
 const equal = require('deep-equal');
 const email = require('./email.js');
 
-
-function readConfig() {
-    return fs.readFileSync(path.join(__dirname, '../config.json'), 'utf8');
-}
-
-let config = readConfig();
-
 function areSignalsEqual(s1, s2) {
     delete s1.time;
     delete s2.time;
@@ -23,11 +16,16 @@ function generateEmail(signal) {
     }
 }
 
+function readConfig() {
+    return JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json'), 'utf8'));
+}
+
 function parseSignal(latestSignal, signal, sendEmail = true) {
     if (!areSignalsEqual(latestSignal, signal)) {
         console.log('New signal');
         console.log(JSON.stringify(signal));
         if (sendEmail) {
+            const config = readConfig();
             const emailParameters = generateEmail(latestSignal);
             email(config.recipients, emailParameters.subject, emailParameters.text);
         }
@@ -38,5 +36,6 @@ function parseSignal(latestSignal, signal, sendEmail = true) {
 }
 
 module.exports = {
-    parseSignal
+    parseSignal,
+    readConfig
 }

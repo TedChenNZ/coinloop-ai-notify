@@ -1,6 +1,9 @@
 const CronJob = require('cron').CronJob;
 const getAISignals = require('./utils/coinloop.js').getAISignals;
 const parseSignal = require('./utils/parse.js').parseSignal;
+const email = require('./utils/email.js');
+const fs = require('fs');
+const path = require('path');
 
 let latestSignal;
 
@@ -14,13 +17,14 @@ function getLatestSignal() {
     });
 }
 
+
 function startCronjob() {
     console.log('Starting cronjob');
     return new CronJob('*/1 * * * *', function () {
         getLatestSignal().then(signal => {
             parseSignal(latestSignal, signal);
             latestSignal = signal;
-        }).catch(err => console.err(err));
+        }).catch(err => console.error(err));
     }, null, true, 'Pacific/Auckland');
 }
 
